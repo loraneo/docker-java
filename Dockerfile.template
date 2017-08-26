@@ -1,4 +1,18 @@
 FROM {{REGISTRY_URL}}/docker-os:7.3a
 
+ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
+             -Djava.security.egd=file:/dev/urandom \
+             -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap
+             
+ENV JAVA_OPTIONS ${JAVA_OPTS}
+
+RUN DOWNLOAD_URL=http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm \	
+	&& curl  -vjkLH "Cookie: oraclelicense=accept-securebackup-cookie" $DOWNLOAD_URL > jdk-8.rpm \
+	&& yum -y localinstall jdk-8.rpm || exit 1 \
+	&& rm ~/jdk-8.rpm
 
 
+ENV JAVA_HOME  /usr/java/latest 
+ENV PATH $PATH:/usr/bin/java
+
+	

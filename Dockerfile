@@ -1,4 +1,4 @@
-FROM {{REGISTRY_URL}}/docker-os:7.3a
+FROM loraneo/docker-os:7.3a
 
 ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
              -Djava.security.egd=file:/dev/urandom \
@@ -6,10 +6,11 @@ ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
              
 ENV JAVA_OPTIONS ${JAVA_OPTS}
 
-RUN DOWNLOAD_URL=http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jdk-8u144-linux-x64.rpm \	
-	&& curl  -vjkLH "Cookie: oraclelicense=accept-securebackup-cookie" $DOWNLOAD_URL > jdk-8.rpm \
+ENV DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jdk-8u151-linux-x64.rpm	
+
+RUN curl  -vjkLH "Cookie: oraclelicense=accept-securebackup-cookie" $DOWNLOAD_URL > jdk-8.rpm  || exit 1 \
 	&& yum -y localinstall jdk-8.rpm || exit 1 \
-	&& rm ~/jdk-8.rpm
+	&& rm jdk-8.rpm
 
 
 ENV JAVA_HOME  /usr/java/latest 

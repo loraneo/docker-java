@@ -8,7 +8,7 @@ ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
              
 ENV JAVA_OPTIONS ${JAVA_OPTS}
 
-ADD http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+ADD http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz jdk-8u171-linux-x64.tar.gz
 
 RUN set -e &&\
     tar -zxf  jdk-8u171-linux-x64.tar.gz &&\

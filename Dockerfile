@@ -11,7 +11,7 @@ ENV JAVA_OPTIONS ${JAVA_OPTS}
 ENV DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
 
 RUN set -e &&\
-    wget -O- --no-check-certificate -c -q \
+    curl -L -o - -k -v \
             --header "Cookie: oraclelicense=accept-securebackup-cookie" \
             $DOWNLOAD_URL | tar -zxf - &&\
     ln -s /opt/jdk* /opt/jdk
@@ -19,4 +19,4 @@ RUN set -e &&\
 
 ENV JAVA_HOME /opt/jdk
 ENV PATH $PATH:/opt/jdk/bin
-	
+    

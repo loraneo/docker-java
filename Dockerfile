@@ -1,4 +1,4 @@
-FROM loraneo/docker-os:7.3a
+FROM loraneo/docker-os:9.5a
 
 ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
                  -XX:MaxRAMFraction=1 \
@@ -8,16 +8,16 @@ ENV JAVA_OPTS -Djava.net.preferIPv4Stack=true \
              
 ENV JAVA_OPTIONS ${JAVA_OPTS}
 
-ENV DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+ENV DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz
 
 WORKDIR /opt
 
 RUN set -e &&\
-    curl -L -o jdk-8u171-linux-x64.tar.gz -k -v \
+    curl -L -o jdk-10-linux-x64.tar.gz -k -v \
             --header "Cookie: oraclelicense=accept-securebackup-cookie" \
             $DOWNLOAD_URL &&\
-    tar -zxf jdk-8u171-linux-x64.tar.gz &&\
-    rm -f jdk-8u171-linux-x64.tar.gz &&\
+    tar -zxf jdk-10-linux-x64.tar.gz &&\
+    rm -f jdk-10-linux-x64.tar.gz &&\
     ln -s /opt/jdk* /opt/jdk
 
 
